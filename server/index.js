@@ -1,21 +1,24 @@
-const express = require("express")
-const mongoose = require("mongoose")
-const cors = require("cors")
-const router = require("./routes/aiRoutes")
+const express = require("express");
+const mongoose = require("mongoose");
+const cors = require("cors");
+const router = require("./routes/aiRoutes");
+require("dotenv").config();
+const app = express();
 
-const app = express()
+// Middleware
+app.use(express.json());
+app.use(cors());
+app.use("/product", router);
 
-
-//middleware
-
-app.use(express.json())
-app.use(cors())
-app.use("/product",router)
-
-
-mongoose.connect("mongodb+srv://sameeruranw81:bH3MgdwutbLuoT7e@cluster0.mdoa8.mongodb.net/aiSolution?retryWrites=true&w=majority&appName=Cluster0")
-.then(()=>console.log("connected to database"))
-.then(()=>{
-    app.listen(5000);
-})
-.catch((err)=> console.log(err))
+// MongoDB Connection
+mongoose
+  .connect(process.env.URI)
+  .then(() => {
+    console.log("Connected to MongoDB");
+    app.listen(process.env.PORT, () => {
+      console.log(`Server started at port ${process.env.PORT}`);
+    });
+  })
+  .catch((err) => {
+    console.error("Error connecting to MongoDB:", err);
+  });
