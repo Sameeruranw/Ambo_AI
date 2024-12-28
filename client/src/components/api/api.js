@@ -1,7 +1,7 @@
 
 import axios from 'axios';
 
-const API_URL = 'http://localhost:5000/product';
+const API_URL = 'https://aisolution-sameer.onrender.com/product';
 
 export const fetchData = async () => {
   try {

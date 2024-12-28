@@ -32,7 +32,7 @@ const ContactForm = () => {
     setError('');
 
     try {
-      const response = await axios.post('http://localhost:5000/product', formData); 
+      const response = await axios.post('https://aisolution-sameer.onrender.com/product', formData); 
       setMessage(response.data.message);
       setLoading(false);
       setFormData({
